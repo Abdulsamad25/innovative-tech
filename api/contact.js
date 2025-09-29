@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // Create transporter
+    // ✅ FIXED HERE (createTransport instead of createTransporter)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

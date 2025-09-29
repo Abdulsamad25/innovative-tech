@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Create transporter
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
