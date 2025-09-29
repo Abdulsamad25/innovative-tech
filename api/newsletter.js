@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const nodemailer = require("nodemailer");
 
 module.exports = async function handler(req, res) {
