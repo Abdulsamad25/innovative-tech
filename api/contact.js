@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
     // Business email (to you)
     const businessEmailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      to: process.env.BUSINESS_EMAIL || process.env.EMAIL_USER,
       subject: `New Contact Form Submission - ${service}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 20px; max-width: 600px; margin: 0 auto; border-radius: 12px;">
