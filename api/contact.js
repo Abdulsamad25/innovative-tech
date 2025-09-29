@@ -1,21 +1,27 @@
 /* eslint-disable no-undef */
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
 
   // Handle preflight request
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
@@ -23,15 +29,15 @@ module.exports = async function handler(req, res) {
 
     // Validate required fields
     if (!name || !email || !service || !message) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     // Validate email format
-    if (!email.includes('@')) {
-      return res.status(400).json({ error: 'Invalid email format' });
+    if (!email.includes("@")) {
+      return res.status(400).json({ error: "Invalid email format" });
     }
 
-    // ✅ FIXED HERE (createTransport instead of createTransporter)
+    // Create transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
